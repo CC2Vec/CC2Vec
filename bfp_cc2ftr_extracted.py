@@ -36,6 +36,4 @@ def extracted_cc2ftr(data, params):
             commit_ftr = model.forward_commit_embeds_diff(pad_added_code, pad_removed_code, state_hunk, state_sent, state_word)            
             commit_ftrs.append(commit_ftr)
         commit_ftrs = torch.cat(commit_ftrs).cpu().detach().numpy()
-    print(commit_ftrs.shape)
     pickle.dump(commit_ftrs, open(params.name, 'wb'))
-    exit()

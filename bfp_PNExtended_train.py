@@ -9,8 +9,7 @@ from tqdm import tqdm
 def train_model(data, params):
     embedding_ftr, pad_msg, pad_added_code, pad_removed_code, labels, dict_msg, dict_code = data
     batches = mini_batches_PNExtended(X_ftr=embedding_ftr, X_msg=pad_msg, X_added_code=pad_added_code, X_removed_code=pad_removed_code, 
-                                    Y=labels, mini_batch_size=params.batch_size, shuffled=True) 
-    print('Number of training batches: ', len(batches))    
+                                    Y=labels, mini_batch_size=params.batch_size, shuffled=True)  
     
     params.filter_sizes = [int(k) for k in params.filter_sizes.split(',')]
     params.save_dir = os.path.join(params.save_dir, datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S'))
