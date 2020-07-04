@@ -11,9 +11,15 @@ Please install the neccessary libraries before running our tool:
 - numpy==1.16.5
 - scikit-learn==0.22.1
 
+## Data & Pretrained models:
+
+Please following the link below to download the data and pretrained models of our paper. 
+
+
+
 ## Hyperparameters:
 ----------------
-We have a number of different parameters:
+We have a number of different parameters (Note that the number of hyperparameters is different depends on different tasks)
 
 * --embedding_dim: Dimension of embedding vectors.
 * --filter_sizes: Sizes of filters used by the hierarchical attention layers. 
@@ -24,6 +30,8 @@ We have a number of different parameters:
 * --learning_rate: Learning rate. 
 * --batch_size: Batch size. 
 * --num_epochs: Number of epochs. 
+
+
 
 ## Contact
 
