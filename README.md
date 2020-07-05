@@ -48,6 +48,44 @@ We have a number of different parameters (Note that the number of hyperparameter
 
       $ python lmg_eval.py -train_data [path of our training data] -test_data [path of our testing data] -train_cc2ftr_data [path of our code changes features extracted from training data] -test_cc2ftr_data [path of our code changes features extracted from testing data] 
 
+### 2. Bug fixing patch identification
+
+- Note that we need the training and testing dataset for this task. Please run this command to train our model:
+
+      $ python bfp_cc2ftr.py -train -train_data [path of our training data] -test_data [path of our training data] -dictionary_data [path of our dictionary data]
+
+- Similar to the first task, the command will create a folder snapshot used to save our model. To extract the code change features, please follow this command:
+
+      $ python bfp_cc2ftr.py -predict -predict_data [path of our data] -dictionary_data [path of our dictionary data] -load_model [path of our model] -name [name of our output file]
+      
+- To train the model for bug fixing patch identification, please follow this command: 
+
+      $ python bfp_PNExtended.py -train -train_data [path of our data] -train_data_cc2ftr [path of our code changes features extracted from training data] -dictionary_data [path of our dictionary data] -load_model [path of our model]
+      
+- To evaluate the model for bug fixing patch identification, please follow this command:
+      
+       $ python bfp_PNExtended.py -predict -pred_data [path of our data] -pred_data_cc2ftr [path of our code changes features extracted from our data] -dictionary_data [path of our dictionary data] -load_model [path of our model]
+       
+### 3. Just-in-time defect prediction
+
+- For each dataset in just-in-time defect prediction (qt or openstack), we create two variants: one for training code changes features ('.pkl'), the other one for training just-in-time defect prediction (end with '_dextend.pkl'). 
+
+- Please run this command to train the code changes features:
+
+      $ python bfp_cc2ftr.py -train -train_data [path of our training data] -test_data [path of our training data] -dictionary_data [path of our dictionary data]
+
+- Similar to the first task, the command will create a folder snapshot used to save our model. To extract the code change features, please follow this command:
+
+      $ python bfp_cc2ftr.py -predict -predict_data [path of our data] -dictionary_data [path of our dictionary data] -load_model [path of our model] -name [name of our output file]
+      
+- To train the model for bug fixing patch identification, please follow this command: 
+
+      $ python bfp_PNExtended.py -train -train_data [path of our data] -train_data_cc2ftr [path of our code changes features extracted from training data] -dictionary_data [path of our dictionary data] -load_model [path of our model]
+      
+- To evaluate the model for bug fixing patch identification, please follow this command:
+      
+       $ python bfp_PNExtended.py -predict -pred_data [path of our data] -pred_data_cc2ftr [path of our code changes features extracted from our data] -dictionary_data [path of our dictionary data] -load_model [path of our model]
+
 ## Contact
 
 Questions and discussion are welcome: vdthoang.2016@smu.edu.sg
