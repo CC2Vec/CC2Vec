@@ -32,6 +32,12 @@ We have a number of different parameters (Note that the number of hyperparameter
 * --batch_size: Batch size. 
 * --num_epochs: Number of epochs. 
 
+## Running and evalutation
+
+- In the first task (log message generation), simply run this command to train network:
+
+$ python PatchNet.py -train -data training_data.out --model patchnet
+
 ## Contact
 
 Questions and discussion are welcome: vdthoang.2016@smu.edu.sg
