@@ -1,5 +1,8 @@
 # CC2Vec: Distributed Representations of Code Changes [[pdf](https://arxiv.org/pdf/2003.05620.pdf)]
 
+## Contact
+Questions and discussion are welcome: vdthoang.2016@smu.edu.sg
+
 ## Implementation Environment
 
 Please install the neccessary libraries before running our tool:
