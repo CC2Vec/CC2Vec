@@ -34,7 +34,7 @@ We have a number of different parameters (Note that the number of hyperparameter
 
 ## Running and evalutation
 
-# Log message generation 
+### Log message generation 
 
 In the first task (log message generation), simply run this command to train our model:
 
