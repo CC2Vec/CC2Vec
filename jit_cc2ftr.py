@@ -107,13 +107,7 @@ if __name__ == '__main__':
         pad_added_code = mapping_dict_code(pad_code=pad_added_code, dict_code=dict_code)
         pad_removed_code = mapping_dict_code(pad_code=pad_removed_code, dict_code=dict_code)
         pad_msg_labels = convert_msg_to_label(pad_msg=pad_msg, dict_msg=dict_msg)
-
-        print('Dictionary message: %i -- Dictionary code: %i' % (len(dict_msg), len(dict_code)))
-        print('Shape of commit message:', pad_msg.shape)
-        print('Shape of added code:', pad_added_code.shape)
-        print('Shape of removed code:', pad_removed_code.shape)
-        print('Shape of message labels:', pad_msg_labels.shape)        
-
+        
         data = (pad_added_code, pad_removed_code, pad_msg_labels, dict_msg, dict_code)   
         extracted_cc2ftr(data=data, params=params)
         print('--------------------------------------------------------------------------------')
