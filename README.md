@@ -60,7 +60,7 @@ We have a number of different parameters (Note that the number of hyperparameter
       
 - To train the model for bug fixing patch identification, please follow this command: 
 
-      $ python bfp_PNExtended.py -train -train_data [path of our data] -train_data_cc2ftr [path of our code changes features extracted from training data] -dictionary_data [path of our dictionary data] -load_model [path of our model]
+      $ python bfp_PNExtended.py -train -train_data [path of our data] -train_data_cc2ftr [path of our code changes features extracted from training data] -dictionary_data [path of our dictionary data]
       
 - To evaluate the model for bug fixing patch identification, please follow this command:
       
@@ -68,23 +68,23 @@ We have a number of different parameters (Note that the number of hyperparameter
        
 ### 3. Just-in-time defect prediction
 
-- For each dataset in just-in-time defect prediction (qt or openstack), we create two variants: one for training code changes features ('.pkl'), the other one for training just-in-time defect prediction (end with '_dextend.pkl'). 
+- For each dataset in just-in-time defect prediction (qt or openstack), we create two variants: one for training code changes features ('.pkl'), the other one for training just-in-time defect prediction model (end with '_dextend.pkl'). 
 
 - Please run this command to train the code changes features:
 
-      $ python bfp_cc2ftr.py -train -train_data [path of our training data] -test_data [path of our training data] -dictionary_data [path of our dictionary data]
+      $ python jit_cc2ftr.py -train -train_data [path of our training data] -test_data [path of our training data] -dictionary_data [path of our dictionary data]
 
-- Similar to the first task, the command will create a folder snapshot used to save our model. To extract the code change features, please follow this command:
+- Similar to the second task, the command will create a folder snapshot used to save our model. To extract the code change features, please follow this command:
 
-      $ python bfp_cc2ftr.py -predict -predict_data [path of our data] -dictionary_data [path of our dictionary data] -load_model [path of our model] -name [name of our output file]
+      $ python jit_cc2ftr.py -predict -predict_data [path of our data] -dictionary_data [path of our dictionary data] -load_model [path of our model] -name [name of our output file]
       
-- To train the model for bug fixing patch identification, please follow this command: 
+- To train the model for just-in-time defect prediction, please follow this command: 
 
-      $ python bfp_PNExtended.py -train -train_data [path of our data] -train_data_cc2ftr [path of our code changes features extracted from training data] -dictionary_data [path of our dictionary data] -load_model [path of our model]
+      $ python jit_DExtended.py -train -train_data [path of our data] -train_data_cc2ftr [path of our code changes features extracted from training data] -dictionary_data [path of our dictionary data]
       
-- To evaluate the model for bug fixing patch identification, please follow this command:
+- To evaluate the model for just-in-time defect prediction, please follow this command:
       
-       $ python bfp_PNExtended.py -predict -pred_data [path of our data] -pred_data_cc2ftr [path of our code changes features extracted from our data] -dictionary_data [path of our dictionary data] -load_model [path of our model]
+       $ python jit_DExtended.py -predict -pred_data [path of our data] -pred_data_cc2ftr [path of our code changes features extracted from our data] -dictionary_data [path of our dictionary data] -load_model [path of our model]
 
 ## Contact
 
