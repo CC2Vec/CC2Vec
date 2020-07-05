@@ -34,9 +34,14 @@ We have a number of different parameters (Note that the number of hyperparameter
 
 ## Running and evalutation
 
-- In the first task (log message generation), simply run this command to train network:
+# Log message generation 
 
-$ python PatchNet.py -train -data training_data.out --model patchnet
+In the first task (log message generation), simply run this command to train our model:
+
+      $ python lmg_cc2ftr.py -train -train_data [path of our training data] -dictionary_data [path of our dictionary data]
+
+The command will create a folder snapshot used to save our model. 
+
 
 ## Contact
 
