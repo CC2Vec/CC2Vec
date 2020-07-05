@@ -40,7 +40,7 @@ In the first task (log message generation), simply run this command to train our
 
       $ python lmg_cc2ftr.py -train -train_data [path of our training data] -dictionary_data [path of our dictionary data]
 
-The command will create a folder snapshot used to save our model. 
+The command will create a folder snapshot used to save our model. Testing
 
 
 ## Contact
