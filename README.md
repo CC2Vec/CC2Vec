@@ -36,15 +36,15 @@ We have a number of different parameters (Note that the number of hyperparameter
 
 ### 1. Log message generation 
 
-In the first task (log message generation), simply run this command to train our model:
+- In the first task (log message generation), simply run this command to train our model:
 
       $ python lmg_cc2ftr.py -train -train_data [path of our training data] -dictionary_data [path of our dictionary data]
 
-The command will create a folder snapshot used to save our model. To extract the code change features, please follow this command:
+- The command will create a folder snapshot used to save our model. To extract the code change features, please follow this command:
 
       $ python lmg_cc2ftr.py -predict -pred_data [path of our data] -dictionary_data [path of our dictionary data] -load_model [path of our model] -name [name of our output file]
       
-To evaluation the first task, please run this command:
+- To evaluation the first task, please run this command:
 
       $ python lmg_eval.py -train_data [path of our training data] -test_data [path of our testing data] -train_cc2ftr_data [path of our code changes features extracted from training data] -test_cc2ftr_data [path of our code changes features extracted from testing data] 
 
