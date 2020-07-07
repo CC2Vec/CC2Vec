@@ -108,7 +108,8 @@ if __name__ == '__main__':
         pad_removed_code = mapping_dict_code(pad_code=pad_removed_code, dict_code=dict_code)
         pad_msg_labels = convert_msg_to_label(pad_msg=pad_msg, dict_msg=dict_msg)
         
-        data = (pad_added_code, pad_removed_code, pad_msg_labels, dict_msg, dict_code)   
+        data = (pad_added_code, pad_removed_code, pad_msg_labels, dict_msg, dict_code)
+        params.batch_size = 1
         extracted_cc2ftr(data=data, params=params)
         print('--------------------------------------------------------------------------------')
         print('--------------------------Finish the extracting process-------------------------')
