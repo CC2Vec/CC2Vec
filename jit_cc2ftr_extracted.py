@@ -7,8 +7,7 @@ import pickle
 def extracted_cc2ftr(data, params):
     pad_added_code, pad_removed_code, labels, dict_msg, dict_code = data    
     batches = mini_batches(X_added_code=pad_added_code, X_removed_code=pad_removed_code, Y=labels, 
-                            mini_batch_size=params.batch_size, shuffled=False)
-    print('Number of batches', len(batches))    
+                            mini_batch_size=params.batch_size, shuffled=False)  
     params.vocab_code = len(dict_code)    
     if len(labels.shape) == 1:
         params.class_num = 1

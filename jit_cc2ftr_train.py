@@ -10,7 +10,6 @@ def train_model(data, params):
     pad_added_code, pad_removed_code, pad_msg_labels, dict_msg, dict_code = data
     batches = mini_batches(X_added_code=pad_added_code, X_removed_code=pad_removed_code, Y=pad_msg_labels, 
                             mini_batch_size=params.batch_size)
-    print('Number of batches', len(batches))
     params.cuda = (not params.no_cuda) and torch.cuda.is_available()
     del params.no_cuda
 
