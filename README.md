@@ -18,7 +18,7 @@ Please install the neccessary libraries before running our tool:
 
 Please following the link below to download the data and pretrained models of our paper. 
 
-- https://drive.google.com/file/d/1mx6OtRAe0CPWePbaPUgfMgpmxC55bDb4/view?usp=sharing
+- https://drive.google.com/file/d/1rPYGjw87YMNAdb2_2baO967i7ynp8sa2/view?usp=sharing
 
 After downloading, simply copy the data and model folders to CC2Vec folder. 
 
