@@ -8,7 +8,7 @@ def extracted_cc2ftr(data, params):
     pad_msg, pad_added_code, pad_removed_code, labels, dict_msg, dict_code = data
     pad_msg_labels = convert_msg_to_label(pad_msg=pad_msg, dict_msg=dict_msg)
     batches = mini_batches(X_added_code=pad_added_code, X_removed_code=pad_removed_code, Y=pad_msg_labels, 
-                            mini_batch_size=params.batch_size, shuffled=False)    
+                            mini_batch_size=params.batch_size, shuffled=False)
             
     params.vocab_code = len(dict_code)
     if len(pad_msg_labels.shape) == 1:

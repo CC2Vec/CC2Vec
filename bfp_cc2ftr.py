@@ -3,6 +3,8 @@ import argparse
 import numpy as np
 from bfp_cc2ftr_train import train_model
 from bfp_cc2ftr_extracted import extracted_cc2ftr
+from bfp_preprocessing import reformat_commit_code
+from bfp_padding import padding_commit
 
 def read_args():
     parser = argparse.ArgumentParser()
@@ -59,17 +61,14 @@ if __name__ == '__main__':
     params = read_args().parse_args()    
     if params.train is True:
         train_data = pickle.load(open(params.train_data, 'rb'))
-        train_pad_msg, train_pad_added_code, train_pad_removed_code, train_labels = train_data    
-
         test_data = pickle.load(open(params.test_data, 'rb'))
-        test_pad_msg, test_pad_added_code, test_pad_removed_code, test_labels = test_data    
-
-        pad_msg = np.concatenate((train_pad_msg, test_pad_msg), axis=0)
-        pad_added_code = np.concatenate((train_pad_added_code, test_pad_added_code), axis=0)
-        pad_removed_code = np.concatenate((train_pad_removed_code, test_pad_removed_code), axis=0)
-        labels = np.concatenate((train_labels, test_labels), axis=0)
-        
         dictionary = pickle.load(open(params.dictionary_data, 'rb'))
+        dict_msg, dict_code = dictionary
+
+        data = train_data + test_data
+        data = reformat_commit_code(commits=data, num_file=params.code_file, num_hunk=params.code_hunk, 
+                                num_loc=params.code_line, num_leng=params.code_length)
+        pad_msg, pad_added_code, pad_removed_code, labels = padding_commit(commits=data, dictionary=dictionary, params=params)            
         dict_msg, dict_code = dictionary  
 
         data = (pad_msg, pad_added_code, pad_removed_code, labels, dict_msg, dict_code)  
@@ -80,11 +79,16 @@ if __name__ == '__main__':
         exit()
 
     elif params.predict is True:
-        data = pickle.load(open(params.predict_data, 'rb'))
+        data = pickle.load(open(params.predict_data, 'rb'))        
         dictionary = pickle.load(open(params.dictionary_data, 'rb'))
-        pad_msg, pad_added_code, pad_removed_code, labels = data
         dict_msg, dict_code = dictionary
-        data = (pad_msg, pad_added_code, pad_removed_code, labels, dict_msg, dict_code)        
+
+        data = reformat_commit_code(commits=data, num_file=params.code_file, num_hunk=params.code_hunk, 
+                                num_loc=params.code_line, num_leng=params.code_length)
+        pad_msg, pad_added_code, pad_removed_code, labels = padding_commit(commits=data, dictionary=dictionary, params=params)
+        
+        params.batch_size = 8        
+        data = (pad_msg, pad_added_code, pad_removed_code, labels, dict_msg, dict_code)
         extracted_cc2ftr(data=data, params=params)
         print('--------------------------------------------------------------------------------')
         print('--------------------------Finish the extracting process-------------------------')

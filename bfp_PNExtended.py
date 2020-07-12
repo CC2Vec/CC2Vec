@@ -2,6 +2,8 @@ import argparse
 import pickle
 from bfp_PNExtended_train import train_model
 from bfp_PNExtended_eval import evaluation_model
+from bfp_preprocessing import reformat_commit_code
+from bfp_padding import padding_commit
 
 def read_args_PNExtend():
     parser = argparse.ArgumentParser()
@@ -48,11 +50,14 @@ if __name__ == '__main__':
     params = read_args_PNExtend().parse_args()    
     if params.train is True:
         train_data = pickle.load(open(params.train_data, 'rb'))
-        train_pad_msg, train_pad_added_code, train_pad_removed_code, train_labels = train_data    
-        train_data_cc2ftr = pickle.load(open(params.train_data_cc2ftr, 'rb'))        
-        
         dictionary = pickle.load(open(params.dictionary_data, 'rb'))
         dict_msg, dict_code = dictionary        
+
+        train_data = reformat_commit_code(commits=train_data, num_file=params.code_file, num_hunk=params.code_hunk, 
+                                num_loc=params.code_line, num_leng=params.code_length)
+        train_pad_msg, train_pad_added_code, train_pad_removed_code, train_labels = padding_commit(commits=train_data, dictionary=dictionary, params=params)  
+        train_data_cc2ftr = pickle.load(open(params.train_data_cc2ftr, 'rb'))        
+        
         data = (train_data_cc2ftr, train_pad_msg, train_pad_added_code, train_pad_removed_code, train_labels, dict_msg, dict_code)  
         train_model(data=data, params=params)
         print('--------------------------------------------------------------------------------')
@@ -61,11 +66,15 @@ if __name__ == '__main__':
         exit()
     elif params.predict is True:
         pred_data = pickle.load(open(params.pred_data, 'rb'))
-        pred_pad_msg, pred_pad_added_code, pred_pad_removed_code, pred_labels = pred_data    
+        dictionary = pickle.load(open(params.dictionary_data, 'rb'))
+        dict_msg, dict_code = dictionary       
+
+        pred_data = reformat_commit_code(commits=pred_data, num_file=params.code_file, num_hunk=params.code_hunk, 
+                                num_loc=params.code_line, num_leng=params.code_length)
+        pred_pad_msg, pred_pad_added_code, pred_pad_removed_code, pred_labels = padding_commit(commits=pred_data, dictionary=dictionary, params=params)           
         pred_data_cc2ftr = pickle.load(open(params.pred_data_cc2ftr, 'rb'))
 
-        dictionary = pickle.load(open(params.dictionary_data, 'rb'))
-        dict_msg, dict_code = dictionary        
+        
         data = (pred_data_cc2ftr, pred_pad_msg, pred_pad_added_code, pred_pad_removed_code, pred_labels, dict_msg, dict_code)  
         evaluation_model(data=data, params=params)
         print('--------------------------------------------------------------------------------')
